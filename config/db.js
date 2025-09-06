@@ -4,8 +4,8 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",   // database server
   user: "root",        // your MySQL username
-  password: "your_password", // your MySQL root password
-  database: "airline_db" // change to your database name
+  password: "NewPass123!", // your MySQL root password
+  database: "flights_search_db_dev", // change to your database name
 });
 
 // Connect
