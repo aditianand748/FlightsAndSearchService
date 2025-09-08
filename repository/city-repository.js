@@ -1,3 +1,5 @@
+const {op} = require('sequelize');
+
 const { City } = require('../models/index');
 
 class CityRepository{
@@ -30,17 +32,12 @@ class CityRepository{
 
     async updateCity(cityId, data) {
         try {
-            //the below approach is used if you use pgsql
-             
-            //const city = await City.update(data,{
-               // where: {
-                  //  id: cityId
-              //  }
+            const city = await City.update(data,{
+                where: {
+                    id: cityId
+                }
 
-           // });
-           const city = await City.findByPk(cityId);
-           city.name = data.name;
-           await city.save();
+            });
             return city;
         } catch (error) {
             console.log("something went wrong in the repository layer");
@@ -57,17 +54,25 @@ class CityRepository{
             throw {error};
         }
     }
-
-    async getAllCities() {
-        try {
-            const cities = await City.findAll();
+async getAllCities(filter) {
+    try {
+        if(filter.name) {
+            const cities = await City.find({
+                where: {
+                    name: {
+                        [op.startsWith] : filter.name
+                    }
+                }
+            });
             return cities;
-
-        } catch (error) {
-            console.log("Something went wrong at the repository layer");
-            throw {error};
         }
+        const cities = await City.findAll();
+        return cities;
+    } catch (error) {
+        console.log("somehing went wrong at the service-layer");
+        throw {error};
     }
+}
 
 
 }
