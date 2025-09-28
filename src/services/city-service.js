@@ -4,7 +4,7 @@ class CityService {
     constructor() {
         this.cityRepository = new CityRepository();
     }
-    async createCity() {
+    async createCity(data) {
         try {
             const city = await this.cityRepository.createCity(cityId);
             return city;
@@ -16,7 +16,7 @@ class CityService {
 
     }
 
-    async deleteCity() {
+    async deleteCity(cityId) {
 
         try {
             const response = this.cityRepository.deleteCity(cityId);
@@ -44,7 +44,6 @@ class CityService {
         try {
             const city = await this.cityRepository.getCity(cityId);
             return city;
-
         } catch (error) {
             console.log("Something went wrong in the service-layer");
             throw {error};
