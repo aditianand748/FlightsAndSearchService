@@ -40,7 +40,7 @@ class CityService {
 
     }
 
-    async getCity() {
+    async getCity(cityId) {
         try {
             const city = await this.cityRepository.getCity(cityId);
             return city;
