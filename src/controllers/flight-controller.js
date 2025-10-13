@@ -17,7 +17,7 @@ const create = async (req,res) => {
         return res.status(500).json({
             data: {},
             success: false,
-            message: 'Not able to get a city',
+            message: 'Not able to create a flight',
             err: error
         });
     }
